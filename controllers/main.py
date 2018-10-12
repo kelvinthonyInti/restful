@@ -68,6 +68,7 @@ class RestApi(http.Controller):
         return request.env["res.partner"].search_read(**kwargs)
 
     @validate_token
+    @make_response()
     @http.route('/api/res.partner.category', type='http', auth='none', methods=["GET"], csrf=False)
     def search_read_res_partner_category(self):
         kwargs = {"fields": ["id", "name"]}
