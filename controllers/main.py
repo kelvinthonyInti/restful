@@ -59,7 +59,7 @@ class RestApi(http.Controller):
 
     @validate_token
     @http.route('/api/kelvin.meza', type='http', auth='none', methods=["GET"], csrf=False)
-    def search_read_res_partner_category(self):
+    def search_read_kelvin_thony(self):
         return "Kelvin Thony"
 
 
