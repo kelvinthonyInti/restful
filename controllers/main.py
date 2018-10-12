@@ -65,7 +65,7 @@ class RestApi(http.Controller):
     def search_read_kelvin_thony(self):
         kwargs = {"fields": ["id", "name"]}
         eval_request_params(kwargs)
-        return kwargs
+        return request.env["res.partner"].search_read(**kwargs)
 
     @validate_token
     @http.route('/api/res.partner.category', type='http', auth='none', methods=["GET"], csrf=False)
