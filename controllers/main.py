@@ -4,8 +4,10 @@ import functools
 import logging
 
 from odoo import http
-from odoo.addons.restful.common import valid_response, invalid_response, extract_arguments
+from odoo.addons.restful.common import invalid_response
 from odoo.http import request
+
+from ..tools import make_response, eval_request_params
 
 _logger = logging.getLogger(__name__)
 
@@ -58,16 +60,18 @@ class RestApi(http.Controller):
     """
 
     @validate_token
+    @make_response()
     @http.route('/api/kelvin.meza', type='http', auth='none', methods=["GET"], csrf=False)
     def search_read_kelvin_thony(self):
-        return "Kelvin Thony"
-
+        kwargs = {"fields": ["id", "name"]}
+        eval_request_params(kwargs)
+        return kwargs
 
     @validate_token
     @http.route('/api/res.partner.category', type='http', auth='none', methods=["GET"], csrf=False)
     def search_read_res_partner_category(self):
         kwargs = {"fields": ["id", "name"]}
-        # eval_request_params(kwargs)
+        eval_request_params(kwargs)
         return request.env["res.partner.category"].search_read(**kwargs)
 
     """
@@ -450,4 +454,3 @@ class RestApi(http.Controller):
                 return 0
         else:
             return 0
-
