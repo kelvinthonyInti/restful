@@ -19,7 +19,7 @@ class APIToken(http.Controller):
         self._token = request.env['api.access_token']
         self._expires_in = request.env.ref(expires_in).sudo().value
 
-    @http.route('/api/auth/token', methods=['GET'], type='http', auth='none', csrf=False)
+    @http.route('/api/auth/token', methods=['POST'], type='http', auth='none', csrf=False)
     def token(self, **post):
         """The token URL to be used for getting the access_token:
 
